@@ -21,7 +21,7 @@ class Vector:
     def __radd__(self, other: Self) -> Self:
         return self + other
 
-    def __iadd__(self, other: Self) -> None:
+    def __iadd__(self, other: Self) -> Self:
         self.x += other.x
         self.y += other.y
         return self
@@ -32,7 +32,7 @@ class Vector:
     def __rsub__(self, other: Self) -> Self:
         return self - other
 
-    def __isub__(self, other: Self) -> None:
+    def __isub__(self, other: Self) -> Self:
         self.x -= other.x
         self.y -= other.y
         return self
@@ -43,7 +43,7 @@ class Vector:
     def __rmul__(self, other: float) -> Self:
         return self * other
 
-    def __imul__(self, other: float) -> None:
+    def __imul__(self, other: float) -> Self:
         self.x *= other
         self.y *= other
         return self
@@ -51,7 +51,7 @@ class Vector:
     def __truediv__(self, other: float) -> Self:
         return Vector(self.x / other, self.y / other)
 
-    def __itruediv__(self, other: float) -> None:
+    def __itruediv__(self, other: float) -> Self:
         self.x /= other
         self.y /= other
         return self
