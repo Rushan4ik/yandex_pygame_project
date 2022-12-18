@@ -1,5 +1,7 @@
 import time
 import pygame
+
+
 WINDOW_SIZE = 500, 500
 WINDOW_TITLE = "Yandex Game"
 WINDOW_FPS = 60
@@ -8,10 +10,13 @@ WINDOW_FPS = 60
 class Window:
     def __init__(self):
         self.start = self.end = time.time()
-        self.background_color = pygame.Color(0, 0, 0)
+        self.running, self.background_color = True, pygame.Color(255, 255, 255)
         self.screen = pygame.display.set_mode(WINDOW_SIZE)
-        self.running = True
+        self.init_components()
         pygame.display.set_caption(WINDOW_TITLE)
+
+    def init_components(self):
+        pass
 
     def update(self):
         duration = self.end - self.start
@@ -26,9 +31,6 @@ class Window:
     def draw(self):
         pass
 
-    def quit(self):
-        self.running = False
-
     def main_loop(self):
         timer = pygame.time.Clock()
         while self.running:
@@ -40,6 +42,9 @@ class Window:
             self.display()
             timer.tick(WINDOW_FPS)
             self.start = self.end
+
+    def quit(self):
+        self.running = False
 
     def handle_events(self):
         for event in pygame.event.get():
