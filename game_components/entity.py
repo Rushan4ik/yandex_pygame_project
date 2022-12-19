@@ -2,6 +2,7 @@ from pygame.sprite import Sprite, AbstractGroup
 from utils import load_image
 from math_components import Vector
 from pygame.transform import scale
+from pygame.mask import from_surface
 GRAVITY_ACCELERATION = 20
 MAX_VERTICAL_SPEED = 300
 
@@ -14,15 +15,13 @@ class Entity(Sprite):
         self.on_ground = False
         self.image, self.velocity = scale(load_image(image_name), size), Vector(*velocity)
         self.rect, self.position = self.image.get_rect().move(*position), Vector(*position)
+        self.mask = from_surface(self.image)
 
     def update(self, *args, **kwargs) -> None:
         if 'event' in kwargs:
             self._handle_event(kwargs['event'])
         if 'duration' in kwargs:
             self._update_duration(kwargs['duration'])
-
-    def _handle_event(self, event) -> None:
-        pass
 
     def _update_duration(self, duration: float) -> None:
         if self.on_ground:
@@ -39,3 +38,5 @@ class Entity(Sprite):
     def __update_rect(self):
         self.rect.x, self.rect.y = map(int, [self.position.x, self.position.y])
 
+    def _handle_event(self, event) -> None:
+        pass
