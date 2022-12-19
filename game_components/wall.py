@@ -46,7 +46,7 @@ class HorizontalWall(Sprite):
         if y1 > y > y2:
             entity.on_ground = True
             entity.velocity.y = 0
-            entity.set_position(entity.position.x, y - entity.rect.h)
+            entity.set_position(entity.position.x, y - entity.rect.h + 1)
         if y1 > y + h > y2:
             entity.velocity.y = 0
             entity.set_position(entity.position.x, y + h)
