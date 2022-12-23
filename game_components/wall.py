@@ -1,3 +1,5 @@
+import time
+
 import pygame
 from pygame.sprite import Sprite, AbstractGroup, collide_mask
 from pygame import Surface
@@ -25,13 +27,13 @@ class Wall(Sprite):
 class VerticalWall(Wall):
     def handle_entity(self, entity: Entity) -> None:
         if not collide_mask(self, entity):
-            pass
+            return
         x, w = self.rect.x, self.rect.w
-        x1, x2 = entity.rect.y, entity.rect.y + entity.rect.h
-        if x1 > x > x2:
+        x1, x2 = entity.rect.x, entity.rect.x + entity.rect.w
+        if x1 < x < x2:
             entity.velocity.x = 0
             entity.set_position(x + entity.rect.w, entity.position.y)
-        if x1 > x + w > x2:
+        if x1 < x + w < x2:
             entity.velocity.x = 0
             entity.set_position(x + w, entity.position.y)
 
@@ -40,13 +42,13 @@ class VerticalWall(Wall):
 class HorizontalWall(Wall):
     def handle_entity(self, entity: Entity) -> None:
         if not collide_mask(self, entity):
-            pass
+            return
         y, h = self.rect.y, self.rect.h
         y1, y2 = entity.rect.y, entity.rect.y + entity.rect.h
-        if y1 > y > y2:
+        if y1 < y < y2:
             entity.on_ground = True
             entity.velocity.y = 0
             entity.set_position(entity.position.x, y - entity.rect.h + 1)
-        if y1 > y + h > y2:
+        if y1 < y + h < y2:
             entity.velocity.y = 0
             entity.set_position(entity.position.x, y + h)
