@@ -1,8 +1,19 @@
+import sys
 import pygame
 from window import Window
 
-if __name__ == '__main__':
+
+def start():
     pygame.init()
+
+
+def terminate():
+    pygame.quit()
+    sys.exit()
+
+
+if __name__ == '__main__':
+    start()
     window = Window()
     window.main_loop()
-    pygame.quit()
+    terminate()
