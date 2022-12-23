@@ -37,7 +37,7 @@ class VerticalWall(Wall):
 
 
 # =
-class HorizontalWall(Sprite):
+class HorizontalWall(Wall):
     def handle_entity(self, entity: Entity) -> None:
         if not collide_mask(self, entity):
             pass
