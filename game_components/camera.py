@@ -1,5 +1,4 @@
 from game_components import Entity, Wall
-from math_components import Vector
 
 
 class Camera:
