@@ -8,13 +8,13 @@ WINDOW_FPS = 60
 
 
 class Window:
+
     def __init__(self):
         self.start = self.end = time.time()
         self.running, self.background_color = True, pygame.Color(255, 255, 255)
         self.screen = pygame.display.set_mode(WINDOW_SIZE)
         self.init_components()
         pygame.display.set_caption(WINDOW_TITLE)
-
     def init_components(self):
         pass
 
@@ -53,3 +53,10 @@ class Window:
     def handle_event(self, event):
         if event.type == pygame.QUIT:
             self.quit()
+
+    def opening(self):
+        pass
+
+    def ending(self):
+        pass
+

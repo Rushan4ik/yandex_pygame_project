@@ -15,5 +15,7 @@ def terminate():
 if __name__ == '__main__':
     start()
     window = Window()
+    window.opening()
     window.main_loop()
+    window.ending()
     terminate()
