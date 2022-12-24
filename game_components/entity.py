@@ -12,7 +12,7 @@ class Entity(Sprite):
                  size: tuple[int, int], velocity: tuple[int, int],
                  *groups: AbstractGroup):
         super().__init__(*groups)
-        self.on_ground = False
+        self.on_ground, self.image_name = False, image_name
         self.image, self.velocity = scale(load_image(image_name), size), Vector(*velocity)
         self.rect, self.position = self.image.get_rect().move(*position), Vector(*position)
         self.mask = from_surface(self.image)
