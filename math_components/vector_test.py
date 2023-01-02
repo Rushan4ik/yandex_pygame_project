@@ -15,7 +15,7 @@ class VectorTest(unittest.TestCase):
             ((3, 4), 5.0),
             ((4, 3), 5.0),
             ((0, 0), 0),
-            ((-4, -3), 5.0)
+            ((-4, -3), 5.0)bu
         ]
         for coord, ans in test_data:
             vector = Vector(*coord)

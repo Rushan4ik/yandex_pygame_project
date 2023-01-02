@@ -2,6 +2,9 @@ import os
 import sys
 import pygame
 
+pygame.init()
+SIZE = WIDTH, HEIGHT = 500, 500
+screen = pygame.display.set_mode(SIZE)
 
 def load_image(name, color_key=None):
     fullname = os.path.join('data', name)
