@@ -1,7 +1,6 @@
 import time
 import pygame
 
-
 WINDOW_SIZE = 500, 500
 WINDOW_TITLE = "Yandex Game"
 WINDOW_FPS = 60
@@ -15,6 +14,7 @@ class Window:
         self.screen = pygame.display.set_mode(WINDOW_SIZE)
         self.init_components()
         pygame.display.set_caption(WINDOW_TITLE)
+
     def init_components(self):
         pass
 
@@ -59,4 +59,3 @@ class Window:
 
     def ending(self):
         pass
-

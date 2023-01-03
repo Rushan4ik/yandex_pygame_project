@@ -2,11 +2,12 @@ import pygame
 from pygame.sprite import AbstractGroup
 
 from game_components import Entity
+from game_components.animation import Animation
 
 
 class Player(Entity):
     # TODO: WRITE IMAGE NAME!
-    IMAGE_NAME = ''
+    IMAGE_NAME = 'tux'
     CONTROL_KEYS = {
         'jump':  {pygame.K_UP},
         'left':  {pygame.K_LEFT},
@@ -19,6 +20,8 @@ class Player(Entity):
                  velocity: tuple[int, int], *groups: AbstractGroup):
         super().__init__(Player.IMAGE_NAME, position, size, velocity, *groups)
         self.right = self.left = False
+        self.live_count = 3
+        self.animation = Animation(Player.IMAGE_NAME, 14, 1)
 
     def _handle_event(self, event) -> None:
         if event.type == pygame.KEYDOWN:
