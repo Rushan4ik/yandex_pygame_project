@@ -36,12 +36,12 @@ class Player(Entity):
             self.right = press
         self.__handle_velocity()
 
-    def jump(self):
+    def jump(self) -> None:
         if self.on_ground:
             self.velocity.y = -Player.JUMP_FORCE
             self.on_ground = False
 
-    def __handle_velocity(self):
+    def __handle_velocity(self) -> None:
         if self.right:
             self.velocity.x += +Player.PLAYER_SPEED
         if self.left:
