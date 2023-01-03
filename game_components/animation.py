@@ -1,10 +1,12 @@
 from game_components.utils import load_image
+from pygame.transform import flip
 
 
 class Animation:
     def __init__(self, image: str, n: int, speed):
         self.frames = [load_image(f'{image}-{i + 1}.png') for i in range(n)]
         self.speed, self.running = speed, True
+        self.reflect_image = False
         self.current = self.time = 0
         self.frame_count = n
 
@@ -24,4 +26,9 @@ class Animation:
         self.current %= self.frame_count
 
     def get_current_frame(self):
+        if self.reflect_image:
+            return flip(self.frames[self.current], True, False)
         return self.frames[self.current]
+
+    def reflect(self):
+        self.reflect_image = not self.reflect_image
