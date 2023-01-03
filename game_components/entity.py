@@ -31,7 +31,7 @@ class Entity(Sprite):
         self.position += self.velocity * duration
         self.__update_rect()
 
-    def set_position(self, x, y):
+    def set_position(self, x: float, y: float) -> None:
         self.position.x, self.position.y = x, y
         self.__update_rect()
 
