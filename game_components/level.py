@@ -20,11 +20,6 @@ class Level:
         self.player.on_ground = False
         for wall in self.walls:
             wall.handle_entity(self.player)
-        self.camera.update(self.player)
-        for wall in self.walls:
-            self.camera.apply(wall)
-        for entity in self.entities:
-            self.camera.apply(entity)
 
     def handle_event(self, event):
         self.player.update(event=event)

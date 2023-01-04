@@ -1,6 +1,6 @@
 import time
 import pygame
-
+from level_info import get_level
 WINDOW_SIZE = 500, 500
 WINDOW_TITLE = "Yandex Game"
 WINDOW_FPS = 60
@@ -16,10 +16,11 @@ class Window:
         pygame.display.set_caption(WINDOW_TITLE)
 
     def init_components(self):
-        pass
+        self.level = get_level(1, WINDOW_SIZE)
 
     def update(self):
         duration = self.end - self.start
+        self.level.update(duration)
 
     @staticmethod
     def display():
@@ -29,7 +30,7 @@ class Window:
         self.screen.fill(self.background_color)
 
     def draw(self):
-        pass
+        self.level.draw(self.screen)
 
     def main_loop(self):
         timer = pygame.time.Clock()
@@ -53,6 +54,8 @@ class Window:
     def handle_event(self, event):
         if event.type == pygame.QUIT:
             self.quit()
+        else:
+            self.level.handle_event(event)
 
     def opening(self):
         pass

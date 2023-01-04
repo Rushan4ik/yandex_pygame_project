@@ -5,7 +5,7 @@ from pygame.sprite import Sprite, AbstractGroup, collide_mask
 from pygame import Surface
 from pygame.mask import from_surface
 from game_components.entity import Entity
-WALL_COLOR = pygame.Color(50, 50, 50)
+WALL_COLOR = pygame.Color(0, 0, 0)
 
 
 class Wall(Sprite):

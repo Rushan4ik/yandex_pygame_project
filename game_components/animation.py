@@ -1,10 +1,10 @@
 from game_components.utils import load_image
-from pygame.transform import flip
+from pygame.transform import flip, scale
 
 
 class Animation:
-    def __init__(self, image: str, n: int, speed):
-        self.frames = [load_image(f'{image}-{i + 1}.png') for i in range(n)]
+    def __init__(self, image: str, size, n: int, speed):
+        self.frames = [scale(load_image(f'{image}-{i + 1}.png'), size) for i in range(n)]
         self.speed, self.running = speed, True
         self.reflect_image = False
         self.current = self.time = 0

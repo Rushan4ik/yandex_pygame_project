@@ -1,7 +1,7 @@
 from pygame.sprite import Sprite, AbstractGroup
-from game_components.utils import load_image
+
+from game_components.animation import Animation
 from math_components import Vector
-from pygame.transform import scale
 from pygame.mask import from_surface
 GRAVITY_ACCELERATION = 20
 MAX_VERTICAL_SPEED = 300
@@ -9,11 +9,13 @@ MAX_VERTICAL_SPEED = 300
 
 class Entity(Sprite):
     def __init__(self, image_name: str, position: tuple[int, int],
-                 size: tuple[int, int], velocity: tuple[int, int],
-                 *groups: AbstractGroup):
+                 size: tuple[int, int], n_count: int, animation_speed,
+                 velocity: tuple[int, int], *groups: AbstractGroup):
         super().__init__(*groups)
         self.on_ground, self.image_name = False, image_name
-        self.image, self.velocity = scale(load_image(image_name), size), Vector(*velocity)
+        self.animation = Animation(image_name, size, n_count, animation_speed)
+        self.image = self.animation.get_current_frame()
+        self.velocity = Vector(*velocity)
         self.rect, self.position = self.image.get_rect().move(*position), Vector(*position)
         self.mask = from_surface(self.image)
 
