@@ -8,14 +8,14 @@ MAX_VERTICAL_SPEED = 300
 
 
 class Entity(Sprite):
-    def __init__(self, image_name: str, position: tuple[int, int],
-                 size: tuple[int, int], n_count: int, animation_speed,
-                 velocity: tuple[int, int], *groups: AbstractGroup):
+    def __init__(self, image_name: str, frame_count: int, animation_speed: float,
+                 position: tuple[int, int], size: tuple[int, int], velocity: tuple[int, int],
+                 *groups: AbstractGroup):
         super().__init__(*groups)
         self.on_ground, self.image_name = False, image_name
-        self.animation = Animation(image_name, size, n_count, animation_speed)
+        self.velocity, self.animation = Vector(*velocity), Animation(image_name, size, frame_count, animation_speed)
+        self.animation.running = False
         self.image = self.animation.get_current_frame()
-        self.velocity = Vector(*velocity)
         self.rect, self.position = self.image.get_rect().move(*position), Vector(*position)
         self.mask = from_surface(self.image)
 
@@ -26,6 +26,8 @@ class Entity(Sprite):
             self._update_duration(kwargs['duration'])
 
     def _update_duration(self, duration: float) -> None:
+        self.animation.update(duration)
+        self.image = self.animation.get_current_frame()
         if self.on_ground:
             self.velocity.y = 0
         else:
@@ -37,7 +39,7 @@ class Entity(Sprite):
         self.position.x, self.position.y = x, y
         self.__update_rect()
 
-    def __update_rect(self):
+    def __update_rect(self) -> None:
         self.rect.x, self.rect.y = map(int, [self.position.x, self.position.y])
 
     def _handle_event(self, event) -> None:

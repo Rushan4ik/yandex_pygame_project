@@ -13,15 +13,14 @@ class Player(Entity):
         'right': {pygame.K_RIGHT}
     }
     PLAYER_SPEED = 50
-    JUMP_FORCE = 70
+    JUMP_FORCE = 30
     ANIMATION_SPEED = 0.3
     FRAME_COUNT = 14
 
     def __init__(self, position: tuple[int, int], size: tuple[int, int],
                  velocity: tuple[int, int], *groups: AbstractGroup):
-        super().__init__(Player.IMAGE_NAME, position, size, Player.FRAME_COUNT,
-                         Player.ANIMATION_SPEED, velocity, *groups)
-        self.image = self.animation.get_current_frame()
+        super().__init__(Player.IMAGE_NAME, Player.FRAME_COUNT, Player.ANIMATION_SPEED,
+                         position, size, velocity, *groups)
         self.right = self.left = False
         self.live_count = 3
 
@@ -54,8 +53,3 @@ class Player(Entity):
             self.velocity.x += -Player.PLAYER_SPEED
         self.animation.reflect_image = self.velocity.x < 0
         self.animation.running = self.velocity.x != 0
-
-    def _update_duration(self, duration: float) -> None:
-        super()._update_duration(duration)
-        self.animation.update(duration)
-        self.image = self.animation.get_current_frame()
