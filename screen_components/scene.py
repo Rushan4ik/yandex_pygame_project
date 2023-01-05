@@ -21,6 +21,7 @@ class Scene:
         self.buttons.draw(screen)
 
     def handle_event(self, event):
+        self.sliders.update(event=event)
         if event.type == pygame.MOUSEBUTTONDOWN:
             self.handle_press(event)
         if self.level is not None:
