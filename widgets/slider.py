@@ -14,11 +14,11 @@ class Slider(Sprite):
             self.callback(value)
 
     def __init__(self, position: tuple[int, int],
-                 size: tuple[int, int], text: str,
-                 min_max_value, value,
+                 size: tuple[int, int], min_max_value: tuple, value: int,
                  handlers: list[Handler] | None = None,
                  background_color: Color = Color(255, 204, 0),
                  *groups: AbstractGroup):
+        super().__init__(*groups)
         self.image = Surface(size)
         self.image.fill(background_color)
         self.background_color = background_color
@@ -29,7 +29,6 @@ class Slider(Sprite):
         if handlers is None:
             handlers = []
         self.handlers = handlers
-        super().__init__(*groups)
 
     def handle_press(self, coords):
         if self.rect.collidepoint(*coords):
