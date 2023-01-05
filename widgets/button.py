@@ -31,6 +31,8 @@ class Button(Sprite):
                             for text_size, image_size in zip(self.text.get_rect(),
                                                              self.image.get_rect())]
         self.image.blit(self.text, (shift_x, shift_y))
+        if handlers is None:
+            handlers = []
         self.handlers = handlers
 
     def update(self, event=None) -> None:
