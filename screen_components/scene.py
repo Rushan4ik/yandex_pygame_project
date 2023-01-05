@@ -22,15 +22,13 @@ class Scene:
 
     def handle_event(self, event):
         if event.type == pygame.MOUSEBUTTONDOWN:
-            self.handle_press(event.x, event.y)
+            self.handle_press(event)
         if self.level is not None:
             self.level.handle_event(event)
 
-    def handle_press(self, x, y):
-        for button in self.buttons:
-            button.handle_press((x, y))
-        for slider in self.sliders:
-            slider.handle_press((x, y))
+    def handle_press(self, event):
+        self.buttons.update(event=event)
+        self.sliders.update(event=event)
 
     def update(self, duration):
         if self.level is not None:

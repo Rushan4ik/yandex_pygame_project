@@ -12,7 +12,7 @@ class Window:
 
     def __init__(self, scene_manager: SceneManager):
         self.start = self.end = time.time()
-        self.running, self.background_color = True, pygame.Color(255, 255, 255)
+        self.running, self.background_color = True, pygame.Color(77, 143, 172)
         self.screen = pygame.display.set_mode(WINDOW_SIZE)
         self.scene_manager = scene_manager
         pygame.display.set_caption(WINDOW_TITLE)

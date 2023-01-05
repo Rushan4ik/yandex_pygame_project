@@ -2,7 +2,7 @@ import pygame
 from pygame import Surface
 from pygame.sprite import Sprite, AbstractGroup
 from pygame.color import Color
-from pygame.font import Font
+from pygame.font import SysFont
 from typing import Callable
 
 
@@ -24,20 +24,21 @@ class Button(Sprite):
         super().__init__(*groups)
         self.image = Surface(size)
         self.image.fill(background_color)
-        self.font = Font(font, font_size)
+        self.font = SysFont(font, font_size)
         self.text = self.font.render(text, True, font_color, background_color)
         self.rect = self.image.get_rect().move(*position)
         shift_x, shift_y = [(image_size - text_size) // 2
-                            for text_size, image_size in zip(self.text.get_rect(),
-                                                             self.image.get_rect())]
+                            for text_size, image_size in zip(self.text.get_rect().size,
+                                                             self.image.get_rect().size)]
         self.image.blit(self.text, (shift_x, shift_y))
         if handlers is None:
             handlers = []
         self.handlers = handlers
 
     def update(self, event=None) -> None:
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            self.handle_press((event.x, event.y))
+        if event is not None:
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                self.handle_press(event.pos)
 
     def handle_press(self, coords):
         if self.rect.collidepoint(*coords):

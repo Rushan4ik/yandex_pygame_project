@@ -1,5 +1,7 @@
 import sys
 import pygame
+
+from screen_components import SceneManager
 from window import Window
 
 
@@ -14,7 +16,8 @@ def terminate():
 
 if __name__ == '__main__':
     start()
-    window = Window()
+    scene_manager = SceneManager()
+    window = Window(scene_manager)
     window.opening()
     window.main_loop()
     window.ending()

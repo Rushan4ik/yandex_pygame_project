@@ -25,15 +25,21 @@ class Slider(Sprite):
         self.rect = self.image.get_rect().move(*position)
         self.min, self.max = min_max_value
         self.value = value
-        self.value_x = self.value / (self.max - self.min) * self.rect.w + self.rect.x
+        self.value_x = self.value / (self.max - self.min) * self.rect.w
         if handlers is None:
             handlers = []
         self.handlers = handlers
+        self.repaint()
+
+    def update(self, event=None) -> None:
+        if event is not None:
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                self.handle_press(event.pos)
 
     def handle_press(self, coords):
         if self.rect.collidepoint(*coords):
-            self.value_x = coords[0]
-            self.value = (self.value_x - self.rect.x) / self.rect.w * (self.max - self.min) + self.min
+            self.value_x = coords[0] - self.rect.x
+            self.value = self.value_x / self.rect.w * (self.max - self.min) + self.min
             self.on_click()
 
     def on_click(self):
@@ -47,4 +53,4 @@ class Slider(Sprite):
     def repaint(self):
         self.image.fill(self.background_color)
         pygame.draw.line(self.image, Color(200, 200, 200), (0, self.rect.h // 2), (self.rect.w, self.rect.h // 2), 5)
-        pygame.draw.circle(self.image, Color(100, 100, 100), (self.value_x, 0), 20)
+        pygame.draw.circle(self.image, Color(100, 100, 100), (self.value_x, self.rect.h // 2), 10)
