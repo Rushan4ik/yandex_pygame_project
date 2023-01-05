@@ -31,3 +31,7 @@ class Scene:
             button.handle_press((x, y))
         for slider in self.sliders:
             slider.handle_press((x, y))
+
+    def update(self, duration):
+        if self.level is not None:
+            self.level.update(duration)
