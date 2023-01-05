@@ -1,10 +1,9 @@
 from pygame.sprite import Sprite, AbstractGroup
 
+from configs import MAX_VERTICAL_SPEED, GRAVITY_ACCELERATION
 from game_components.animation import Animation
 from math_components import Vector
 from pygame.mask import from_surface
-GRAVITY_ACCELERATION = 20
-MAX_VERTICAL_SPEED = 300
 
 
 class Entity(Sprite):
