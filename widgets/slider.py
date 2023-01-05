@@ -25,7 +25,7 @@ class Slider(Sprite):
         self.rect = self.image.get_rect().move(*position)
         self.min, self.max = min_max_value
         self.value, self.pressed = value, False
-        self.value_x = self.value / (self.max - self.min) * self.rect.w
+        self.value_x = (self.value - self.min) / (self.max - self.min) * self.rect.w
         if handlers is None:
             handlers = []
         self.handlers = handlers

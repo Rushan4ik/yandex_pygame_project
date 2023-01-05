@@ -1,5 +1,5 @@
 from pygame import Color, Surface
-from pygame.font import Font
+from pygame.font import SysFont
 from pygame.sprite import Sprite, AbstractGroup
 
 
@@ -10,11 +10,11 @@ class Label(Sprite):
         super().__init__(*groups)
         self.image = Surface(size)
         self.image.fill(background_color)
-        self.font = Font(font, font_size)
+        self.font = SysFont(font, font_size)
         self.text = self.font.render(text, True, font_color, background_color)
         self.rect = self.image.get_rect().move(*position)
         shift_x, shift_y = [(image_size - text_size) // 2
-                            for text_size, image_size in zip(self.text.get_rect(),
-                                                             self.image.get_rect())]
+                            for text_size, image_size in zip(self.text.get_rect().size,
+                                                             self.image.get_rect().size)]
         self.image.blit(self.text, (shift_x, shift_y))
 
