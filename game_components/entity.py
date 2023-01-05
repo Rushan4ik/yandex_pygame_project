@@ -3,15 +3,15 @@ from json import load
 from game_components.animation import Animation
 from math_components import Vector
 from pygame.mask import from_surface
-json_value = load(open('configs.json'))
-GRAVITY_ACCELERATION = json_value['GRAVITY_ACCELERATION']
-MAX_VERTICAL_SPEED = json_value['MAX_VERTICAL_SPEED']
 
 
 class Entity(Sprite):
     def __init__(self, image_name: str, frame_count: int, animation_speed: float,
                  position: tuple[int, int], size: tuple[int, int], velocity: tuple[int, int],
                  *groups: AbstractGroup):
+        json_value = load(open('configs.json'))
+        self.GRAVITY_ACCELERATION = json_value['GRAVITY_ACCELERATION']
+        self.MAX_VERTICAL_SPEED = json_value['MAX_VERTICAL_SPEED']
         super().__init__(*groups)
         self.on_ground, self.image_name = False, image_name
         self.velocity, self.animation = Vector(*velocity), Animation(image_name, size, frame_count, animation_speed)
@@ -32,7 +32,7 @@ class Entity(Sprite):
         if self.on_ground:
             self.velocity.y = 0
         else:
-            self.velocity.y = min(self.velocity.y + GRAVITY_ACCELERATION * duration, MAX_VERTICAL_SPEED)
+            self.velocity.y = min(self.velocity.y + self.GRAVITY_ACCELERATION * duration, self.MAX_VERTICAL_SPEED)
         self.position += self.velocity * duration
         self.__update_rect()
 
