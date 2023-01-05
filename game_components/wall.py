@@ -1,5 +1,3 @@
-import time
-
 import pygame
 from pygame.sprite import Sprite, AbstractGroup, collide_mask
 from pygame import Surface

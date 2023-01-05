@@ -1,9 +1,11 @@
 from pygame.sprite import Sprite, AbstractGroup
-
-from configs import MAX_VERTICAL_SPEED, GRAVITY_ACCELERATION
+from json import load
 from game_components.animation import Animation
 from math_components import Vector
 from pygame.mask import from_surface
+json_value = load(open('configs.json'))
+GRAVITY_ACCELERATION = json_value['GRAVITY_ACCELERATION']
+MAX_VERTICAL_SPEED = json_value['MAX_VERTICAL_SPEED']
 
 
 class Entity(Sprite):

@@ -1,8 +1,8 @@
 import pygame
 from pygame.sprite import AbstractGroup
-
-from configs import PLAYER_ANIMATION_SPEED, PLAYER_CONTROL_KEYS, PLAYER_SPEED, PLAYER_JUMP_FORCE
+from json import load
 from game_components import Entity
+from configs import PLAYER_CONTROL_KEYS
 
 
 class Player(Entity):
@@ -11,7 +11,11 @@ class Player(Entity):
 
     def __init__(self, position: tuple[int, int], size: tuple[int, int],
                  velocity: tuple[int, int], *groups: AbstractGroup):
-        super().__init__(Player.IMAGE_NAME, Player.FRAME_COUNT, PLAYER_ANIMATION_SPEED,
+        json_value = load(open("configs.json"))
+        self.PLAYER_ANIMATION_SPEED = json_value['PLAYER_ANIMATION_SPEED']
+        self.PLAYER_SPEED = json_value['PLAYER_SPEED']
+        self.PLAYER_JUMP_FORCE = json_value['PLAYER_JUMP_FORCE']
+        super().__init__(Player.IMAGE_NAME, Player.FRAME_COUNT, self.PLAYER_ANIMATION_SPEED,
                          position, size, velocity, *groups)
         self.right = self.left = False
         self.live_count = 3
@@ -34,14 +38,14 @@ class Player(Entity):
 
     def jump(self) -> None:
         if self.on_ground:
-            self.velocity.y = -PLAYER_JUMP_FORCE
+            self.velocity.y = -self.PLAYER_JUMP_FORCE
             self.on_ground = False
 
     def __handle_velocity(self) -> None:
         self.velocity.x = 0
         if self.right:
-            self.velocity.x += +PLAYER_SPEED
+            self.velocity.x += +self.PLAYER_SPEED
         if self.left:
-            self.velocity.x += -PLAYER_SPEED
+            self.velocity.x += -self.PLAYER_SPEED
         self.animation.reflect_image = self.velocity.x < 0
         self.animation.running = self.velocity.x != 0
