@@ -1,5 +1,6 @@
 from screen_components import Scene
 from screen_components.scene_level_choice import LevelChoiceScene
+from screen_components.scene_level_play import LevelScene
 from screen_components.scene_main import MainMenuScene
 from screen_components.scene_settings import SettingsScene
 
@@ -21,5 +22,5 @@ class SceneManager:
         self.current_scene = LevelChoiceScene(self)
 
     def set_level_scene(self, level_number: int) -> None:
-        print(level_number, self)
+        self.current_scene = LevelScene(self, level_number)
 
