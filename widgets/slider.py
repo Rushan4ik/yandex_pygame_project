@@ -14,8 +14,8 @@ class Slider(Sprite):
             self.callback(value)
 
     def __init__(self, position: tuple[int, int],
-                 size: tuple[int, int], min_max_value: tuple, value: int,
-                 handlers: list[Handler] | None = None,
+                 size: tuple[int, int], min_max_value: tuple[float, float],
+                 value: int | float, handlers: list[Handler] | None = None,
                  background_color: Color = Color(255, 204, 0),
                  *groups: AbstractGroup):
         super().__init__(*groups)

@@ -1,6 +1,6 @@
 import pygame
 from pygame.sprite import AbstractGroup
-from json import load
+from .utils import get_configs_param
 from game_components import Entity
 from configs import PLAYER_CONTROL_KEYS
 
@@ -11,10 +11,9 @@ class Player(Entity):
 
     def __init__(self, position: tuple[int, int], size: tuple[int, int],
                  velocity: tuple[int, int], *groups: AbstractGroup):
-        json_value = load(open("configs.json"))
-        self.PLAYER_ANIMATION_SPEED = json_value['PLAYER_ANIMATION_SPEED']
-        self.PLAYER_SPEED = json_value['PLAYER_SPEED']
-        self.PLAYER_JUMP_FORCE = json_value['PLAYER_JUMP_FORCE']
+        self.PLAYER_ANIMATION_SPEED = get_configs_param('PLAYER_ANIMATION_SPEED')
+        self.PLAYER_SPEED = get_configs_param('PLAYER_SPEED')
+        self.PLAYER_JUMP_FORCE = get_configs_param('PLAYER_JUMP_FORCE')
         super().__init__(Player.IMAGE_NAME, Player.FRAME_COUNT, self.PLAYER_ANIMATION_SPEED,
                          position, size, velocity, *groups)
         self.right = self.left = False
