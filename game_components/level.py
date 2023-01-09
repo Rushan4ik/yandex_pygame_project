@@ -2,12 +2,12 @@ from pygame.sprite import Group
 
 from game_components import Player, Wall, Camera, Entity
 from game_components.finish import Finish
-from game_components.spike import Spike
+from game_components.fire import Fire
 
 
 class Level:
     def __init__(self, window_size: tuple[int, int],
-                 walls: list[Wall], spikes: list[Spike],
+                 walls: list[Wall], spikes: list[Fire],
                  entities: list[Entity], spawn_point: tuple[int, int],
                  finishes: list[Finish]):
         self.running, self.result = True, 0
@@ -47,6 +47,7 @@ class Level:
         self.walls.draw(screen)
         self.entities.draw(screen)
         self.finishes.draw(screen)
+        self.spikes.draw(screen)
         self.player_group.draw(screen)
 
     def get_result(self) -> float:
