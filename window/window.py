@@ -1,6 +1,5 @@
 import time
 import pygame
-from level_info import get_level
 from screen_components import SceneManager
 
 WINDOW_SIZE = 500, 500
@@ -15,6 +14,7 @@ class Window:
         self.running, self.background_color = True, pygame.Color(77, 143, 172)
         self.screen = pygame.display.set_mode(WINDOW_SIZE)
         self.scene_manager = scene_manager
+        self.scene_manager.window_size = WINDOW_SIZE
         pygame.display.set_caption(WINDOW_TITLE)
 
     def init_components(self):
