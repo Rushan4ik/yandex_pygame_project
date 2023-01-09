@@ -1,4 +1,4 @@
-from game_components import Level
+from game_components import Level, Wall, Finish
 from screen_components import Scene
 from widgets import Button
 from game_components import VerticalWall, HorizontalWall, Spike
@@ -6,12 +6,12 @@ from game_components import VerticalWall, HorizontalWall, Spike
 
 def load_level(window_size: tuple[int, int], level_number: int) -> Level | None:
     return Level(window_size,
-                 [VerticalWall((0, 0), (60, 500)),
-                  VerticalWall((700, 0), (30, 500)),
-                  HorizontalWall((500, 60), (730, 40))],  # WALLS
+                 [Wall((0, 0), (60, 200)),
+                  Wall((0, 300), (100, 30))],  # WALLS
                  [],  # SPIKES
                  [],  # ENTITIES
-                 (1, 1))
+                 (100, 1),
+                 [Finish((50, 100), (50, 50))])
 
 
 class LevelScene(Scene):

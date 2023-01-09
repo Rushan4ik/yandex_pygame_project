@@ -40,11 +40,13 @@ class Level:
     def restart(self):
         self.result = 0
         self.player.live_count -= 1
+        self.player.velocity.x = self.player.velocity.y = 0
         self.player.set_position(*self.spawn_point)
 
     def draw(self, screen):
         self.walls.draw(screen)
         self.entities.draw(screen)
+        self.finishes.draw(screen)
         self.player_group.draw(screen)
 
     def get_result(self) -> float:
